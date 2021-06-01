@@ -1,0 +1,29 @@
+{
+  "name": "vue-i18n-sync",
+  "version": "0.1.0",
+  "description": "vue-i18n-sync",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node test/index.js",
+    "debug": "node --inspect test/index.js",
+    "test": "echo \\\"Error: no dist specified\\\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maweimaweima/vue-i18n-sync.git"
+  },
+  "keywords": [
+    "object",
+    "file",
+    "sync"
+  ],
+  "author": "deepFish",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maweimaweima/vue-i18n-sync/issues"
+  },
+  "homepage": "https://github.com/maweimaweima/vue-i18n-sync#readme",
+  "dependencies": {
+    "object-file-sync": "^1.0.0"
+  }
+}
