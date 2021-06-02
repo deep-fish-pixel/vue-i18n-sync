@@ -75,7 +75,7 @@ module.exports = function (options = {}) {
     ignored: /(^|[\/\\])\../, // ignore dotfiles
     persistent: true
   });
-  const fileFilterSync = filterSync(options.replaceDir);
+  const fileFilterSync = filterSync(options.i18nRoot);
 
   watcher
     .on('add', path => {
