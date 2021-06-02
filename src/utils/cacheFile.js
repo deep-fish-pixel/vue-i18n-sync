@@ -1,7 +1,7 @@
 const path = require('path');
+const { error } = require('console-log-cmd');
 const fse = require('fs-extra');
-const { getRelativeDir } = require("./moduleOptions");
-const { error } = require("./log");
+const { getRelativeDir } = require('./moduleOptions');
 
 const cacheFileMap = new Map();
 

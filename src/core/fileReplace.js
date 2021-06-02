@@ -1,7 +1,7 @@
 const path = require('path');
-const { getFileContent, writeFile, writeFiles } = require("../utils/cacheFile");
+const { success, error } = require('console-log-cmd');
+const { getFileContent, writeFile, writeFiles } = require('../utils/cacheFile');
 const { getModuleOptions } = require('../utils/moduleOptions');
-const { success, error } = require('../utils/log');
 
 /**
  * 对修改键值的文件内容替换

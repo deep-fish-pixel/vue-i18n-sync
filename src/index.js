@@ -17,13 +17,13 @@ const filterSync = require('./core/filterSync');
 
 module.exports = function (options = {}) {
   options = Object.assign({
-    // 同步目录共同的根目录。
+    // 同步配置根目录
     i18nRoot: '',
-    // 保持并行同步的目录。可不配置，根据root自动生成
+    // 保持并行同步的目录。默认根据root自动生成
     i18nDirs: [],
-    // 创建目录的默认入口index文件的后缀名
-    defaultIndexExtension: options.defaultIndexExtension || '.js',
-    // 自动引用目录模块
+    // 创建配置文件的后缀名 默认.js
+    extension: options.extension || '.js',
+    // 自动import模块 默认true
     autoImportModule: true,
     // 键映射配置
     i18nKeyMap: {
@@ -35,7 +35,7 @@ module.exports = function (options = {}) {
     changeI18nKeyHandle: (changeKeyList) => {
       return fileReplaceDir(path.join(process.cwd(), 'test/src'), changeKeyList);
     },
-    // 替换目标字符串的根目录
+    // 修改目标字符串的根目录
     replaceDir: path.join(process.cwd(), 'test/src'),
     changeUseI18nReplace: {
       replaceTargetRegExp: /(\{\{\s*|="\s*)(\$t\(\s*['"])([\w-.]+)>([\w-.]+)('\s*\)\s*"|"\s*\)\s*}})/g,
@@ -60,7 +60,7 @@ module.exports = function (options = {}) {
   setFileSyncOptions({
     root: options.i18nRoot,
     dirs: options.i18nDirs,
-    defaultIndexExtension: options.defaultIndexExtension,
+    extension: options.extension,
     autoImportModule: options.autoImportModule,
     changeKeyHandle: options.changeI18nKeyHandle,
     keyMap: options.i18nKeyMap,

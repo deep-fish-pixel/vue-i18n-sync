@@ -1,6 +1,6 @@
 const path = require('path');
-const { writeFiles } = require("../utils/cacheFile");
-const { success } = require('../utils/log');
+const { success } = require('console-log-cmd');
+const { writeFiles } = require('../utils/cacheFile');
 
 /**
  * 使用多个新旧值替换文件内容
