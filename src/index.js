@@ -2,6 +2,7 @@ const path = require('path');
 const chokidar = require('chokidar');
 const { getFileContent } = require('./utils/cacheFile');
 const { setModuleOptions } = require('./utils/moduleOptions');
+const getAutoImportExportModuleTypes = require('./utils/getAutoImportExportModuleTypes');
 const fileReplace = require('./core/fileReplace');
 const fileReplaceDir = require('./core/fileReplaceDir');
 
@@ -31,12 +32,14 @@ module.exports = function (options = {}) {
     },
     // 设置key文件位置的分割符，为空表示不分离
     i18nSetKeyToFileSeperator: '.',
+    // 自动导出方式配置
+    autoImportExportModuleTypes: getAutoImportExportModuleTypes(options.i18nRoot),
     // 修改配置key的回调
     changeI18nKeyHandle: (changeKeyList) => {
       return fileReplaceDir(path.join(process.cwd(), 'test/src'), changeKeyList);
     },
     // 修改目标字符串的根目录
-    replaceDir: path.join(process.cwd(), 'test/src'),
+    replaceDir: '',
     changeUseI18nReplace: {
       replaceTargetRegExp: /(\{\{\s*|="\s*)(\$t\(\s*['"])([\w-.]+)>([\w-.]+)('\s*\)\s*"|"\s*\)\s*}})/g,
       replacePropagationRegExpHandle: (all, $1, $2, $3, $4) => {
@@ -64,7 +67,8 @@ module.exports = function (options = {}) {
     autoImportModule: options.autoImportModule,
     changeKeyHandle: options.changeI18nKeyHandle,
     keyMap: options.i18nKeyMap,
-    setKeyToFileSeperator: options.i18nSetKeyToFileSeperator
+    setKeyToFileSeperator: options.i18nSetKeyToFileSeperator,
+    autoImportExportModuleTypes: options.autoImportExportModuleTypes || {}
   });
 
   const watcher = chokidar.watch(options.replaceDir, {
