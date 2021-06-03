@@ -1,6 +1,6 @@
 const path = require('path');
 const { success, error } = require('console-log-cmd');
-const { getFileContent, writeFile, writeFiles } = require('../utils/cacheFile');
+const { readFile, writeFile, writeDirFiles } = require('cache-io-disk');
 const { getModuleOptions } = require('../utils/moduleOptions');
 
 /**
@@ -8,7 +8,7 @@ const { getModuleOptions } = require('../utils/moduleOptions');
  * @param target
  */
 module.exports = function fileReplace(target) {
-  Promise.all([getFileContent(target, true)])
+  Promise.all([readFile(target, true)])
     .then(([targetContent]) => {
       const {
         changeUseI18nReplace: {
@@ -36,7 +36,7 @@ module.exports = function fileReplace(target) {
         });
       }
       if (replaceMatchArgs) {
-        return writeFiles(replaceDir, (content, target) => {
+        return writeDirFiles(replaceDir, (content, target) => {
           const newContent = content.replace(replacePropagationRegExpObj.regExp, (...args) => {
             return replacePropagationHandle(replaceMatchArgs, ...args);
           });

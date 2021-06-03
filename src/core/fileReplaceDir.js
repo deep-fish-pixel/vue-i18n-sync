@@ -1,6 +1,6 @@
 const path = require('path');
 const { success } = require('console-log-cmd');
-const { writeFiles } = require('../utils/cacheFile');
+const { writeDirFiles } = require('cache-io-disk');
 
 /**
  * 使用多个新旧值替换文件内容
@@ -9,7 +9,7 @@ const { writeFiles } = require('../utils/cacheFile');
  * @returns {Promise<T>}
  */
 module.exports = function (replaceDir, changeKeyList) {
-  return writeFiles(replaceDir, (content, target) => {
+  return writeDirFiles(replaceDir, (content, target) => {
     return replaceList(replaceDir, target, content, changeKeyList);
   });
 }

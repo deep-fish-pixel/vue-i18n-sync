@@ -1,6 +1,6 @@
 {
   "name": "vue-i18n-sync",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "vue-i18n-sync",
   "main": "src/index.js",
   "scripts": {
@@ -24,8 +24,9 @@
   },
   "homepage": "https://github.com/maweimaweima/vue-i18n-sync#readme",
   "dependencies": {
-    "cache-io-disk": "^1.0.0",
+    "auto-import-module": "^1.0.12",
+    "cache-io-disk": "^1.0.4",
     "console-log-cmd": "^1.0.1",
-    "object-file-sync": "^1.0.4"
+    "object-file-sync": "^1.0.9"
   }
 }

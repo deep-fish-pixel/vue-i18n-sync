@@ -1,6 +1,6 @@
 const path = require('path');
 const chokidar = require('chokidar');
-const { getFileContent } = require('./utils/cacheFile');
+const { readFile } = require('cache-io-disk');
 const { setModuleOptions } = require('./utils/moduleOptions');
 const getAutoImportExportModuleTypes = require('./utils/getAutoImportExportModuleTypes');
 const fileReplace = require('./core/fileReplace');
@@ -30,6 +30,8 @@ module.exports = function (options = {}) {
     i18nKeyMap: {
       'views': 'page',
     },
+    // 处理的文件类型
+    fileExtensions: /\.(js|ts|jsx|html|vue)$/,
     // 设置key文件位置的分割符，为空表示不分离
     i18nSetKeyToFileSeperator: '.',
     // 自动导出方式配置
@@ -68,7 +70,8 @@ module.exports = function (options = {}) {
     changeKeyHandle: options.changeI18nKeyHandle,
     keyMap: options.i18nKeyMap,
     setKeyToFileSeperator: options.i18nSetKeyToFileSeperator,
-    autoImportExportModuleTypes: options.autoImportExportModuleTypes || {}
+    autoImportExportModuleTypes: options.autoImportExportModuleTypes || {},
+    fileExtensions: options.fileExtensions,
   });
 
   const watcher = chokidar.watch(options.replaceDir, {
@@ -79,15 +82,21 @@ module.exports = function (options = {}) {
 
   watcher
     .on('add', path => {
-      fileFilterSync(path)(addFileSync);
-      getFileContent(path);
+      if (path.match(options.fileExtensions)) {
+        fileFilterSync(path)(addFileSync);
+        readFile(path);
+      }
     })
     .on('change', path => {
-      fileFilterSync(path)(changeFileSync);
-      fileReplace(path);
+      if (path.match(options.fileExtensions)) {
+        fileFilterSync(path)(changeFileSync);
+        fileReplace(path);
+      }
     })
     .on('unlink', path => {
-      fileFilterSync(path)(removeFileSync);
+      if (path.match(options.fileExtensions)) {
+        fileFilterSync(path)(removeFileSync);
+      }
     })
     .on('addDir', path => {
       fileFilterSync(path)(addDirSync);
