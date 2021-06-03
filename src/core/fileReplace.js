@@ -29,7 +29,6 @@ module.exports = function fileReplace(target) {
       if (newTargetContent != targetContent) {
         writeFile(target, newTargetContent).then((result) => {
           if (result) {
-            debugger
             success(`[键值修改] 新值 ${replacePropagationRegExpObj.newKey} 替换旧值 ${replacePropagationRegExpObj.oldKey} 成功: ${target.replace(path.join(replaceDir, '/'), '')}`);
           } else {
             error(`[键值修改] 新值 ${replacePropagationRegExpObj.newKey} 替换旧值 ${replacePropagationRegExpObj.oldKey} 失败: ${target.replace(path.join(replaceDir, '/'), '')}`);

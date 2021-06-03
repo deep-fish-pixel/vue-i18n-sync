@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/maweimaweima/vue-i18n-sync#readme",
   "dependencies": {
+    "cache-io-disk": "^1.0.0",
     "console-log-cmd": "^1.0.1",
     "object-file-sync": "^1.0.4"
   }

@@ -13,9 +13,6 @@ function setModuleOptions(options) {
 }
 
 function getRelativeDir(dir) {
-  if(typeof getModuleOptions !== 'function'){
-    debugger
-  }
   const { root } = getModuleOptions();
   return dir.replace(root, '');
 }

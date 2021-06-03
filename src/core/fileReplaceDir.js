@@ -26,7 +26,6 @@ function replaceList(rootDir, target, content, changeKeysObject) {
     const oldKey = changeKeysObject[newKey];
     return [new RegExp(`(['"])${oldKey.replace(/\\./g, '\\.')}(['"])`, 'g'), oldKey, newKey];
   });
-  debugger
   return replaceRegExpList.reduce((value, [replaceRegExp, oldKey, newKey]) => {
     return replaceContent(rootDir, target, content, replaceRegExp, oldKey, newKey);
   }, content)
@@ -41,9 +40,6 @@ function replaceList(rootDir, target, content, changeKeysObject) {
  * @param newKey
  */
 function replaceContent(rootDir, target, content, replaceRegExp, oldKey, newKey) {
-  if (!content.replace) {
-    debugger
-  }
   const newContent = content.replace(replaceRegExp, (all, $1, $2) => {
     return `${$1}${newKey}${$2}`;
   });

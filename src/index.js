@@ -36,12 +36,12 @@ module.exports = function (options = {}) {
     autoImportExportModuleTypes: getAutoImportExportModuleTypes(options.i18nRoot),
     // 修改配置key的回调
     changeI18nKeyHandle: (changeKeyList) => {
-      return fileReplaceDir(path.join(process.cwd(), 'test/src'), changeKeyList);
+      return fileReplaceDir(options.replaceDir, changeKeyList);
     },
     // 修改目标字符串的根目录
     replaceDir: '',
     changeUseI18nReplace: {
-      replaceTargetRegExp: /(\{\{\s*|="\s*)(\$t\(\s*['"])([\w-.]+)>([\w-.]+)('\s*\)\s*"|"\s*\)\s*}})/g,
+      replaceTargetRegExp: /(\{\{\s*|="\s*|\.)(\$t\(\s*['"])([\w-._]+)>([\w-_.]+)('\s*\)\s*["']|["']\s*\)\s*}}|["']\s*\)\s*[^\w-])/g,
       replacePropagationRegExpHandle: (all, $1, $2, $3, $4) => {
         return {
           regExp: new RegExp(`([\'\"])` + $3.replace(/\\./g, '\\.') + `([\'\"])`, 'g'),

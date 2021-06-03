@@ -16,12 +16,14 @@ function getFileContent(file, noCache) {
   if (content) {
     return Promise.resolve(content);
   } else {
-    return fse.readFile(file, 'utf8').then((content) => {
-      // 缓存文件
-      cacheFileMap.set(file, content);
+    const content = fse.readFileSync(file, 'utf8');
+    // 缓存文件
+    cacheFileMap.set(file, content);
+    return Promise.resolve(content).then((content) => {
       return content;
     }).catch((e) => {
-      error(`[读取文件失败]不存在该文件: ${getRelativeDir(file)}`)
+      error(`[读取文件失败]不存在该文件: ${getRelativeDir(file)}`);
+      return false;
     });
   }
 }
@@ -33,12 +35,18 @@ function getFileContent(file, noCache) {
  * @returns {Promise<T>}
  */
 function writeFile(file, content) {
-  return fse.writeFile(file, content).then(() => {
-    // 缓存文件
-    cacheFileMap.set(file, content);
-    return true;
-  }).catch((e) => {
-    error(`[写入文件失败] ${getRelativeDir(file)} ${e.message}`)
+  if(fse.existsSync(file)){
+    const originalContent = fse.readFileSync(file, 'utf8');
+    // 解决重复写入导致编辑器重新加载
+    if (originalContent === content) {
+      return Promise.resolve(content);
+    }
+  }
+  // 先缓存内容
+  cacheFileMap.set(file, content);
+  fse.writeFileSync(file, content)
+  return Promise.resolve(content).catch((e) => {
+    error(`[写入文件失败] ${getRelativeDir(file)} ${e.message}`);
     return false;
   })
 }
