@@ -11,7 +11,7 @@
 ### Install
 Install with npm:
 
-`$ npm install --save-dev vue-i18n-sync`
+`$ npm install --save vue-i18n-sync`
 
 ### Uses：
 
