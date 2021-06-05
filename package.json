@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node test/index.js",
     "debug": "node --inspect test/index.js",
+    "pub": "sh publish.sh",
     "test": "echo \\\"Error: no dist specified\\\" && exit 1"
   },
   "repository": {
