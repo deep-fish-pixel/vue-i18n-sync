@@ -27,6 +27,6 @@
     "auto-import-module": "^1.0.12",
     "cache-io-disk": "^1.0.4",
     "console-log-cmd": "^1.0.1",
-    "object-file-sync": "^1.0.9"
+    "object-file-sync": "^1.0.10"
   }
 }

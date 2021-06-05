@@ -20,7 +20,7 @@ Install with npm:
 vueI18nSync({
     // 同步配置根目录
     i18nRoot: path.join(process.cwd(), 'src/locales'),
-    // 修改目标字符串的根目录 不配置
+    // 修改目标字符串时会查找替换的目录 可不配置
     replaceDir: path.join(process.cwd(), 'src')
 });
 ```
