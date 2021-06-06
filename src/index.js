@@ -24,6 +24,8 @@ module.exports = function (options = {}) {
     i18nDirs: [],
     // 创建配置文件的后缀名 默认.js
     extension: options.extension || '.js',
+    // 排除同步目录
+    excludeSyncDirRegExp: null,
     // 自动import模块 默认true
     autoImportModule: true,
     // 键映射配置
@@ -72,6 +74,7 @@ module.exports = function (options = {}) {
     setKeyToFileSeperator: options.i18nSetKeyToFileSeperator,
     autoImportExportModuleTypes: options.autoImportExportModuleTypes || {},
     fileExtensions: options.fileExtensions,
+    excludeSyncDirRegExp: options.excludeSyncDirRegExp,
   });
 
   const watcher = chokidar.watch(options.replaceDir, {
