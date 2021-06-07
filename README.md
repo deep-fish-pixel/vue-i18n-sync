@@ -41,6 +41,8 @@ vueI18nSync({
     extension: '.js',
     // 自动import模块 默认true
     autoImportModule: true,
+    // 排除同步目录
+    excludeSyncDirRegExp: null,
 });
 ```
 
